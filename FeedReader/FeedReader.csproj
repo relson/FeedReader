@@ -32,8 +32,8 @@
     <NoWarn></NoWarn>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0|AnyCPU'">
-    <DocumentationFile>bin\Debug\net6.0\CodeHollow.FeedReader.xml</DocumentationFile>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0|AnyCPU'">
+    <DocumentationFile>bin\Debug\net8.0\CodeHollow.FeedReader.xml</DocumentationFile>
     <NoWarn></NoWarn>
   </PropertyGroup>
 
@@ -41,8 +41,8 @@
     <DocumentationFile>bin\Release\netstandard2.0\CodeHollow.FeedReader.xml</DocumentationFile>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net6.0|AnyCPU'">
-    <DocumentationFile>bin\Release\net6.0\CodeHollow.FeedReader.xml</DocumentationFile>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0|AnyCPU'">
+    <DocumentationFile>bin\Release\net8.0\CodeHollow.FeedReader.xml</DocumentationFile>
     <NoWarn></NoWarn>
   </PropertyGroup>
 
