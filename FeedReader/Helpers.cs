@@ -26,7 +26,9 @@
         private static readonly HttpClient _httpClient = new HttpClient(
             new HttpClientHandler
             {
-                AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
+                AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,
+                // This is not recommended for production code, but it is necessary for some tests to pass.
+                ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => { return true; }
             }
         );
 
