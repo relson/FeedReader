@@ -66,6 +66,20 @@ If the url to the feed is not known, then you can use FeedReader.GetFeedUrlsFrom
 
 The code contains a sample console application: https://github.com/codehollow/FeedReader/tree/master/FeedReader.ConsoleSample
 
+## Using a custom HttpClient
+
+If you need to use a custom `HttpClient` (e.g. to add custom headers), you can create an instance of `FeedReaderClient` and pass your `HttpClient` to the constructor.
+
+```csharp
+    var httpClient = new HttpClient();
+    // add custom headers or other properties to the httpclient
+
+    var feedReader = new FeedReaderClient(httpClient);
+    var feed = await feedReader.ReadAsync("https://arminreiter.com/feed");
+
+    Console.WriteLine("Feed Title: " + feed.Title);
+```
+
 
 ## Specifications
 - RSS 0.91: http://www.rssboard.org/rss-0-9-1-netscape

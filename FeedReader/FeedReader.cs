@@ -21,6 +21,9 @@
     /// </example>
     public static class FeedReader
     {
+        private static readonly Lazy<FeedReaderClient> _lazyFeedReaderClient = new Lazy<FeedReaderClient>(() => new FeedReaderClient());
+
+        private static FeedReaderClient FeedReaderClient => _lazyFeedReaderClient.Value;
         /// <summary>
         /// gets a url (with or without http) and returns the full url
         /// </summary>
@@ -87,12 +90,9 @@
         /// <returns>a list of links including the type and title, an empty list if no links are found</returns>
         /// <example>FeedReader.GetFeedUrlsFromUrl("codehollow.com"); // returns a list of all available feeds at
         /// https://codehollow.com </example>
-        public static async Task<IEnumerable<HtmlFeedLink>> GetFeedUrlsFromUrlAsync(string url, CancellationToken cancellationToken, bool autoRedirect = true)
+        public static Task<IEnumerable<HtmlFeedLink>> GetFeedUrlsFromUrlAsync(string url, CancellationToken cancellationToken, bool autoRedirect = true)
         {
-            url = GetAbsoluteUrl(url);
-            string pageContent = await Helpers.DownloadAsync(url, cancellationToken, autoRedirect).ConfigureAwait(false);
-            var links = ParseFeedUrlsFromHtml(pageContent);
-            return links;
+            return FeedReaderClient.GetFeedUrlsFromUrlAsync(url, cancellationToken, autoRedirect);
         }
 
         /// <summary>
@@ -172,10 +172,9 @@
         /// <param name="autoRedirect">autoredirect if page is moved permanently</param>
         /// <param name="userAgent">override built-in user-agent header</param>
         /// <returns>parsed feed</returns>
-        public static async Task<Feed> ReadAsync(string url, CancellationToken cancellationToken, bool autoRedirect = true, string userAgent=null)
+        public static Task<Feed> ReadAsync(string url, CancellationToken cancellationToken, bool autoRedirect = true, string userAgent=null)
         {
-            var feedContent = await Helpers.DownloadBytesAsync(GetAbsoluteUrl(url), cancellationToken, autoRedirect, userAgent).ConfigureAwait(false);
-            return ReadFromByteArray(feedContent);
+            return FeedReaderClient.ReadAsync(url, cancellationToken, autoRedirect, userAgent);
         }
 
         /// <summary>
